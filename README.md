@@ -1,8 +1,8 @@
-# MODULE NAME
+# Limerick Ingest
 
 ## Introduction
 
-DESCRIPTION
+Limerick custom Islandora Ingest
 
 ## Requirements
 
