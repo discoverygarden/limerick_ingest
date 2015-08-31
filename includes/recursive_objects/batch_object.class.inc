@@ -2,8 +2,6 @@
 /**
  * @file
  * A batch object class file.
- *
- * @todo: handle images, audio, pdf, dirs.
  */
 
 /**
@@ -16,8 +14,9 @@ class LimerickIngestRecursiveBatchObject extends IslandoraScanBatchObject {
     'mp3' => 'islandora:sp-audioCModel',
     '' => 'islandora:collectionCModel',
   );
+
   /**
-   * Function getChildren.
+   * Recurse through the directories.
    *
    * @see IslandoraScanBatchObject::getChildren()
    */
@@ -41,12 +40,20 @@ class LimerickIngestRecursiveBatchObject extends IslandoraScanBatchObject {
     foreach ($directory_contents as $uri => $value) {
       $scaned[$uri] = $value;
     }
-
     foreach ($scaned as $uri => $info) {
+      $mods = limerick_ingest_get_metadata_file(
+        $info->uri,
+        $params['metadata_target'],
+        $params['target']
+      );
+      $info_array = array($info);
+      if ($mods) {
+        $info_array['xml'] = $mods;
+      }
       $children[$uri] = new LimerickIngestRecursiveBatchObject(
         $connection,
         $info->name,
-        array($info),
+        $info_array,
         $params
       );
     }
