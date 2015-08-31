@@ -55,14 +55,13 @@ function limerick_ingest_ingest($type, $parameters, $connection) {
 /**
  * Get info on a metadata file for a base file from a directory.
  */
-function limerick_ingest_get_metadata_file($base_file, $metadata_dir, $data_dir, $postcards = FALSE) {
-  if (!$postcards) {
+function limerick_ingest_get_metadata_file($base_file, $metadata_dir, $data_dir, $type = FALSE) {
+  if (!$type) {
     $base_file = realpath($base_file);
   }
   $metadata_dir = realpath($metadata_dir);
   $data_dir = realpath($data_dir);
   $base_file_after_dir = substr($base_file, strlen($data_dir) + 1, strlen($base_file));
-
   if (!$base_file_after_dir) {
     $base_dir = strrchr($base_file, '/');
     $base_file_after_dir = substr($base_dir, 1, strlen($base_dir));

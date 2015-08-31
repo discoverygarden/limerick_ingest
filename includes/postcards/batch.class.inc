@@ -44,7 +44,7 @@ class LimerickIngestPostcardBatch extends IslandoraScanBatch {
           substr($file_object->uri, 0, strlen($file_object->uri) - 5),
           $this->parameters['metadata_target'],
           $this->parameters['target'],
-          TRUE
+          'postcards'
         );
         if ($mods) {
           $name_to_file_object['xml'] = $mods;

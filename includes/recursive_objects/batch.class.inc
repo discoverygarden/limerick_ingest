@@ -38,4 +38,27 @@ class LimerickIngestRecursiveBatch extends IslandoraScanBatch {
     }
     return $files;
   }
+
+  /**
+   * Grab metadata DS.
+   *
+   * @see IslandoraScanBatch::groupFiles()
+   */
+  protected function groupFiles($files) {
+    module_load_include('inc', 'limerick_ingest', 'includes/ingest');
+    $grouped = parent::groupFiles($files);
+    foreach ($grouped as $name => &$name_to_file_object) {
+      foreach ($name_to_file_object as $file_object) {
+        $mods = limerick_ingest_get_metadata_file(
+          $file_object->uri,
+          $this->parameters['metadata_target'],
+          $this->parameters['target']
+        );
+        if ($mods) {
+          $name_to_file_object['xml'] = $mods;
+        }
+      }
+    }
+    return $grouped;
+  }
 }
