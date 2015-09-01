@@ -12,6 +12,7 @@ class LimerickIngestRecursiveBatchObject extends IslandoraScanBatchObject {
     'pdf' => 'islandora:sp_pdf',
     'tif' => 'islandora:sp_large_image_cmodel',
     'mp3' => 'islandora:sp-audioCModel',
+    'wav' => 'islandora:sp-audioCModel',
     '' => 'islandora:collectionCModel',
   );
 
