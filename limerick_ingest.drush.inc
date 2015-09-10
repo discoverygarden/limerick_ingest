@@ -18,7 +18,7 @@ function limerick_ingest_drush_command() {
         'book' => 'drush -u 1 -v limerick_ingest --parent=islandora:root --namespace=namespace --type=book --data_target=/some_dir --metadata_target=/some_other_dir',
         'images' => 'drush -u 1 -v limerick_ingest --parent=islandora:root --namespace=namespace --type=images --data_target=/some_dir --metadata_target=/some_other_dir',
         'recursive_objects' => 'drush -u 1 -v limerick_ingest --parent=islandora:root --namespace=namespace --type=recursive_objects --data_target=/some_dir --metadata_target=/some_other_dir',
-        'issues' => 'drush -u 1 -v limerick_ingest --parent=islandora:root --namespace=namespace --type=issues --data_target=/some_dir --metadata_target=/some_other_dir',
+        'issues' => 'drush -u 1 -v limerick_ingest --parent=islandora:some_newspaper --namespace=namespace --type=issues --data_target=/some_dir_of_issue_dirs --metadata_target=/some_other_dir',
         'postcards' => 'drush -u 1 -v limerick_ingest --parent=islandora:root --namespace=namespace --type=postcards --data_target=/some_dir --metadata_target=/some_other_dir',
       ),
       'options' => array(
