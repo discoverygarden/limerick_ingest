@@ -34,7 +34,10 @@ class LimerickIngestRecursiveBatch extends IslandoraScanBatch {
     );
     $key = 1;
     foreach ($directory_contents as $uri => $value) {
-      $files[$value->name] = $value;
+      // Prevent the use of strange directories.
+      if ($value->name != '@eaDir') {
+        $files[$value->name] = $value;
+      }
     }
     return $files;
   }
