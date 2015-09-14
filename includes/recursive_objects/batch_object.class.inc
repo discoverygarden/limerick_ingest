@@ -39,7 +39,10 @@ class LimerickIngestRecursiveBatchObject extends IslandoraScanBatchObject {
     );
     ksort($directory_contents);
     foreach ($directory_contents as $uri => $value) {
-      $scaned[$uri] = $value;
+      // Prevent the use of strange directories.
+      if ($value->name != '@eaDir') {
+        $scaned[$uri] = $value;
+      }
     }
     foreach ($scaned as $uri => $info) {
       $mods = limerick_ingest_get_metadata_file(
