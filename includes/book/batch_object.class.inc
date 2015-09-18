@@ -27,7 +27,9 @@ class LimerickIngestBookBatchObject extends IslandoraBookBookBatchObject {
     ksort($directory_contents);
     $key = 1;
     foreach ($directory_contents as $uri => $value) {
-      $scaned[$key++]['.']['OBJ'] = $value;
+      if ($value->name != '@eaDir') {
+        $scaned[$key++]['.']['OBJ'] = $value;
+      }
     }
     foreach ($scaned as $sequence => $info) {
       if ($sequence != '.') {

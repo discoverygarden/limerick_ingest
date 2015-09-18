@@ -8,7 +8,6 @@
  * Batch preprocessor.
  */
 class LimerickIngestImageBatch extends IslandoraScanBatch {
-
   /**
    * Get main DS for objects.
    *
@@ -16,7 +15,14 @@ class LimerickIngestImageBatch extends IslandoraScanBatch {
    */
   protected function scan() {
     $scaned = $this->scanDirectory($this->parameters['target']);
-    return $scaned;
+    $files = array();
+    foreach ($scaned as $key => $value) {
+      // Prevent the use of strange directories.
+      if (strpos($value->uri, '@eaDir') === FALSE) {
+        $files[$key] = $value;
+      }
+    }
+    return $files;
   }
 
   /**
