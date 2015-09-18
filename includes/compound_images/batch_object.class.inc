@@ -33,7 +33,9 @@ class LimerickIngestCompoundBatchObject extends IslandoraScanBatchObject {
       );
       ksort($directory_contents);
       foreach ($directory_contents as $uri => $value) {
-        $scaned[substr($uri, $target_length)] = $value;
+        if ($value->name != '@eaDir') {
+          $scaned[substr($uri, $target_length)] = $value;
+        }
       }
       foreach ($scaned as $info) {
         $children[] = new LimerickIngestCompoundBatchObject($connection, NULL, array($info), $params);
