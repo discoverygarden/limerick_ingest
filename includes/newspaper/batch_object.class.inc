@@ -57,7 +57,10 @@ class LimerickIngestNewspaperBatchObject extends IslandoraNewspaperIssueBatchObj
         $mods_xpath = new DOMXPath($mods_doc);
         $mods_xpath->registerNamespace('m', 'http://www.loc.gov/mods/v3');
 
-        $this->label = $mods_xpath->evaluate('string(//m:mods/m:relatedItem/m:note/text())');
+        $note = $mods_xpath->evaluate('string(//m:mods/m:relatedItem/m:note/text())');
+        $processed_note = str_replace(';', ', ', $note);
+        $issued = $mods_xpath->evaluate('string(//m:mods/m:originInfo/m:dateIssued/text())');
+        $this->label = "$processed_note ($issued)";
       }
     }
     return $this->label;
