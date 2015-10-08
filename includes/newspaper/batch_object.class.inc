@@ -60,7 +60,12 @@ class LimerickIngestNewspaperBatchObject extends IslandoraNewspaperIssueBatchObj
         $note = $mods_xpath->evaluate('string(//m:mods/m:relatedItem/m:note/text())');
         $processed_note = str_replace(';', ', ', $note);
         $issued = $mods_xpath->evaluate('string(//m:mods/m:originInfo/m:dateIssued/text())');
-        $this->label = "$processed_note ($issued)";
+        if ($issued) {
+          $this->label = "$processed_note ($issued)";
+        }
+        else {
+          $this->label = $processed_note;
+        }
       }
     }
     return $this->label;
